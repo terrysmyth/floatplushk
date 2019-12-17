@@ -1,0 +1,20 @@
+{% extends "_layout" %}
+{% block content %}
+<div class="contactHolder" style="background-image: url(https://cdn.swimswam.com/wp-content/uploads/2019/07/20190706_GSca_KA17442-1.jpg)">
+    <div class="overlay"></div>
+    <div class="contactPage">
+        <h3>{{entry.heading}}</h3>
+        <p>{{entry.body}}</p>
+        
+        <div class="contactForm">
+            <form>
+                <input type="text" name="" placeholder="NAME" required>
+                <input type="email" name="" placeholder="EMAIL" required>
+                <input class="long" type="text" name="" placeholder="SUBJECT" required>
+                <textarea placeholder="MESSAGE" required></textarea>
+                <input type="submit" name="" value="SEND">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

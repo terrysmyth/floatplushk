@@ -1,0 +1,19 @@
+{% extends "_layout" %}
+{% block content %}
+
+<div class="curriculumHolder">
+    <h2 class="title">Curriculum</h2>
+    {% for item in entry.curriculumSection %}
+    <div class="curriculumSections">
+        {% if item.sectionTitle %}
+        <h3>{{item.sectionTitle}}</h3>
+        {% endif %}
+        <div class="sectionBody">
+            {{item.sectionBody}}
+            <img src="{{item.sectionImg.one().url()}}">
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

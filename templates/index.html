@@ -1,0 +1,72 @@
+{% extends "_layout" %}
+{% block content %}
+<div class="hero">
+    <div class="heroOverlay"></div>
+    <div class="heroOuterBox">
+        <div class="heroBox">
+            <h1>PROFESSIONAL SWIM COACHING</h1>
+            <h3>40+<br>Years<br>Of experience.</h3>
+            <hr>
+            <div class="heroBtn spaceBetween">
+                <a href="/venues">VENUES
+                    <i class="material-icons">keyboard_arrow_right</i></a>
+            </div>
+            <hr>
+            <div class="heroBtn spaceBetween">
+                <a class="pink" href="#">REGISTER
+                    <i class="material-icons">keyboard_arrow_right</i></a>
+            </div>
+        </div>
+        <div class="finalBox spaceBetween">
+            <a href="/contact">CONTACT US
+                <i class="material-icons">email</i></a>
+        </div>
+    </div>
+</div>
+<div class="quoteSection">
+    <div class="overlay"></div>
+    <blockquote>We love to teach...<span>the world to swim..</span></blockquote>
+</div>
+<div class="section">
+    <div class="sectionHolder">
+        <div class="overlay"></div>
+        <h2>VENUES</h2>
+        {% for entry in craft.entries().section('venues') %}
+        {% for item in entry.venue %}
+        <div class="classCard" style="background-image: url({{item.image.one().url()}});">
+            <div class="cardCover">
+                <h4>{{item.venueName}}</h4>
+                <h5><span>Address</span>{{item.address}}</h5>
+            </div>
+            <a href="venues">MORE</a>
+        </div>
+        {% endfor %}
+        {% endfor %}
+    </div>
+</div>
+<div class="gallery">
+    <div class="overlay"></div>
+    <h2>GALLERY</h2>
+    <div class="galleryInner">
+        <!-- SLICK -->
+        <div class="slickGalley">
+            {% for img in entry.gallery %}
+            <img src="{{img.url()}} " alt="FloatPlus Swim">
+            {% endfor %}
+            
+        </div>
+    </div>
+    
+</div>
+<!-- CLASSES -->
+    {% include "directives/classes" %}
+<div class="container-fluid">
+    <div class="section hello">
+        <div class="textSide">
+            <h3>HELLO,</h3>
+            <p>Our comprehensive Swimming Programme is available at a number of private and residential clubs.</p>
+        </div>
+        <img src="http://www.hongkongmoms.com.hk/wp-content/uploads/2016/11/unspecified-3.jpeg" alt="floatplus">
+    </div>
+</div>
+{% endblock %}

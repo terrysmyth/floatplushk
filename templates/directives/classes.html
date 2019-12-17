@@ -1,0 +1,224 @@
+{% for entry in craft.entries().section('classes') %}
+<div class="classInner">
+    <h2>CLASSES</h2>
+    <div class="classFilter">
+        <button class="venueFilter" onclick="getClasses('jcc')">Jewish Community Centre</button>
+        <button class="venueFilter" onclick="getClasses('ryc')">Aberdeen Yacht Club</button>
+        <button class="venueFilter" onclick="getClasses('rbc')">Repulse Bay Club</button>
+        <button class="venueFilter active" onclick="getClasses('hkfc')">HK Football Club</button>
+    </div>
+    <div class="allClasses">
+        <h6 id="venueTitle">Hong Kong Football Club</h6>
+        <h5><a href="curriculum">See Full Curriculum</a></h5>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="filterCard">
+                        <h4>6m-3yrs</h4>
+                        <hr>
+                        {% for class in entry.classes %}
+                        {% if class.classLevel == "waterBabies" %}
+                        <div class="badgeCard {{class.venue}}" data-toggle="modal" data-target="#exampleModal{{loop.index}}">
+                            <img src="/images/icon1.png" alt="FloatPlus {{class.classLevel}} swim class">
+                            <p>Water Babies</p>
+                            <div class="dot tadpoles"></div>
+                            <h3>{{class.day}}</h3>
+                        </div>
+                        {% endif %}
+                        {% if class.classLevel == "tadpoles" %}
+                        <div class="badgeCard {{class.venue}}" data-toggle="modal" data-target="#exampleModal{{loop.index}}">
+                            <img src="/images/icon2.png" alt="FloatPlus {{class.classLevel}} swim class">
+                            <p>Tadpoles</p>
+                            <div class="dot tadpoles"></div>
+                            <h3>{{class.day}}</h3>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="filterCard">
+                        <h4>3-7yrs</h4>
+                        <hr>
+                        {% for class in entry.classes %}
+                        {% if class.classLevel == "guppies" %}
+                        <div class="badgeCard {{class.venue}}" data-toggle="modal" data-target="#exampleModal{{loop.index}}">
+                            <img src="/images/icon3.png" alt="FloatPlus {{class.classLevel}} swim class">
+                            <p>Guppies</p>
+                            <div class="dot guppies"></div>
+                            <h3>{{class.day}}</h3>
+                        </div>
+                        {% endif %}
+                        {% if class.classLevel == "penguins" %}
+                        <div class="badgeCard {{class.venue}}" data-toggle="modal" data-target="#exampleModal{{loop.index}}">
+                            <img src="/images/icon4.png" alt="FloatPlus {{class.classLevel}} swim class">
+                            <p>Penguins</p>
+                            <div class="dot penguins"></div>
+                            <h3>{{class.day}}</h3>
+                        </div>
+                        {% endif %}
+                        {% if class.classLevel == "sealions" %}
+                        <div class="badgeCard {{class.venue}}" data-toggle="modal" data-target="#exampleModal{{loop.index}}">
+                            <img src="/images/icon5.png" alt="FloatPlus {{class.classLevel}} swim class">
+                            <p>Sealions</p>
+                            <div class="dot sealions"></div>
+                            <h3>{{class.day}}</h3>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-sm-12 col-md-6 col-lg-4">
+                    <div class="filterCard">
+                        <h4>7-10+yrs</h4>
+                        <hr>
+                        {% for class in entry.classes %}
+                        {% if class.classLevel == "dolphins" %}
+                        <div class="badgeCard  {{class.venue}}" data-toggle="modal" data-target="#exampleModal{{loop.index}}">
+                            <img src="/images/icon6.png" alt="FloatPlus {{class.classLevel}} swim class">
+                            <p>Dolphins</p>
+                            <div class="dot dolphins"></div>
+                            <h3>{{class.day}}</h3>
+                        </div>
+                        {% endif %}
+                        {% if class.classLevel == "sharks" %}
+                        <div class="badgeCard  {{class.venue}}" data-toggle="modal" data-target="#exampleModal{{loop.index}}">
+                            <img src="/images/icon7.png" alt="FloatPlus {{class.classLevel}} swim class">
+                            <p>Sharks</p>
+                            <div class="dot sharks"></div>
+                            <h3>{{class.day}}</h3>
+                        </div>
+                        {% endif %}
+                        {% if class.classLevel == "orcas" %}
+                        <div class="badgeCard  {{class.venue}}" data-toggle="modal" data-target="#exampleModal{{loop.index}}">
+                            <img src="/images/icon8.png" alt="FloatPlus {{class.classLevel}} swim class">
+                            <p>Orcas</p>
+                            <div class="dot orcas"></div>
+                            <h3>{{class.day}}</h3>
+                        </div>
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% for class in entry.classes %}
+<!-- MODAL -->
+<div class="modal fade" id="exampleModal{{loop.index}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="memberOr">
+                    <button id="nonMemberBtn{{loop.index}}" class="memberBtns active" onclick="changeFilter({{loop.index}}, 'a')">Non-Members</button>
+                    <button id="memberBtn{{loop.index}}" class="memberBtns" onclick="changeFilter({{loop.index}}, 'b')">Members</button>
+                </div>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="gloFoxEmbed embed{{loop.index}}">
+                {% if (class.membership == 'membersOnly') %}
+                <div class="innerEmbed">
+                    <p>To book this class you need to be a member of <span>{{class.venue.label}}</span>.</p>
+                    <button onclick="changeFilter({{loop.index}})">Book</button>
+                </div>
+                {%endif %}
+                {% if (class.membership != 'membersOnly') %}
+                <iframe id="glofox_{{loop.index}}" src="{{class.glofoxEmbed}}" width="100%" scrolling="yes" frameborder="0"></iframe>
+                {% endif %}
+            </div>
+            <div class="membersOnly mOnly{{loop.index}}">
+                {% if (class.membership != 'all') %}
+                {% if class.classLevel == 'waterBabies' %}
+                <img src="/images/classBigBabies.png" alt="Floatplus {{class.classLevel}}">
+                {% elseif class.classLevel == 'tadpoles' %}
+                <img src="/images/classBigTadpoles.png" alt="Floatplus {{class.classLevel}}">
+                {% elseif class.classLevel == 'penguins' %}
+                <img src="/images/classBigPenguins.png" alt="Floatplus {{class.classLevel}}">
+                {% elseif class.classLevel == 'guppies' %}
+                <img src="/images/classBigGuppies.png" alt="Floatplus {{class.classLevel}}">
+                {% elseif class.classLevel == 'sealions' %}
+                <img src="/images/classBigSealions.png" alt="Floatplus {{class.classLevel}}">
+                {% elseif class.classLevel == 'orcas' %}
+                <img src="/images/classBigOrca.png" alt="Floatplus {{class.classLevel}}">
+                {% elseif class.classLevel == 'sharks' %}
+                <img src="/images/classBigSharks.png" alt="Floatplus {{class.classLevel}}">
+                {% elseif class.classLevel == 'dolphins' %}
+                <img src="/images/classBigDolphins.png" alt="Floatplus {{class.classLevel}}">
+                {% else %}
+                {% endif %}
+                <div class="membersInfo">
+                    <h4>{{class.classTitle}}</h4>
+                    <h5>HK{{class.price}}</h5>
+                    <p>{{class.description}}</p>
+                    <p>{{class.day.label}}: {{class.time}}</p>
+                    <hr>
+                    <h4>Register:</h4>
+                    <h5>{{class.title}}</h5>
+                    <!-- FORM -->
+                    <form>
+                        <div class="form-group">
+                            <label for="ex1">Student first name</label>
+                            <input type="text" id="ex1" class="form-control" placeholder="Jenny" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ex2">Student surname name</label>
+                            <input type="text" id="ex2" class="form-control" placeholder="Smith" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ex3">{{class.venue.label}} membership no.</label>
+                            <input type="text" id="ex3" class="form-control" placeholder="#" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ex4">Date of birth</label>
+                            <input type="text" id="ex4" class="form-control" placeholder="21/06/2011" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ex5">Email address</label>
+                            <input type="email" id="ex5" class="form-control" placeholder="name@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="ex6">Guardian name</label>
+                            <input type="text" id="ex6" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="ex10">Medical/other notes:</label>
+                            <textarea class="form-control" id="ex10" rows="3"></textarea>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                            <label class="form-check-label" for="defaultCheck1">
+                                I HAVE READ AND ACCEPT THE <a href="terms" target="_blank">TERMS AND CONDITIONS.</a>
+                            </label>
+                        </div>
+                        <hr>
+                        <h5>item: {{class.classTitle}}</h5>
+                        <p>{{class.day.label}}: {{class.time}}</p>
+                        <hr>
+                        <button type="submit" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
+                {% else %}
+                <p>No membership necessary for this class.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+iFrameResize({
+        log: false,
+        checkOrigin: false,
+        tolerance: 10,
+        sizeHeight: true,
+        heightCalculationMethod: 'lowestElement',
+        minHeight: 300,
+        width: 300,
+        scrolling: 'auto'
+    },
+    '#glofox_{{loop.index}}')
+</script>
+{% endfor %}
+{% endfor %}

@@ -1,0 +1,44 @@
+{% extends "_layout" %}
+{% block content %}
+<div class="venuesHolder">
+    <h2>VENUES</h2>
+    <div class="venues">
+        {% for item in entry.venue %}
+        <div class="venue">
+            <img src="{{item.image.one().url()}}" alt="{{item.venueName}} Logo | FloatPlus">
+            <h3>{{item.venueName | upper}}</h3>
+            <h6>{{item.address}}</h6>
+            <hr>
+            <p>{{item.description}}</p>
+            <ul>
+                {% for facility in item.facilities %}
+                <li>
+                    
+                        {% if facility == 'heatedWater' %}
+                        <i class="material-icons">hot_tub</i>
+                        {% elseif facility == 'parentsViewing' %}
+                        <i class="material-icons">visibility</i>
+                        {% elseif facility == 'showers' %}
+                        <i class="material-icons">cloud_queue</i>
+                        {% elseif facility == 'shallowWaterArea' %}
+                        <i class="material-icons">child_care</i>
+                        {% elseif facility == '25mPool' %}
+                        <i class="material-icons">pool</i>
+                        {% elseif facility == '50mPool' %}
+                        <i class="material-icons">pool</i>
+                        {% elseif facility == 'indoorPool' %}
+                        <i class="material-icons">home</i>
+                        {% elseif facility == 'outdoorPool' %}
+                        <i class="material-icons">brightness_low</i>
+                        {% endif %}
+                    {{facility.label}}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+    <!-- SCHEDULE IFRAME -->
+    <!-- <iframe src="https://app.glofox.com/portal/#/branch/5ddc88114abc3c4691079cac/classes-day-view" frameborder="0" width="100%" height="1200"></iframe> -->
+</div>
+{% endblock %}
